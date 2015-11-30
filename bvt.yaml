@@ -1,0 +1,9 @@
+# Simple tests to verify things work against a live REST service that returns JSON.. Github is a natural one
+---
+- config:
+  - testset: "Simple github.com API Test"
+- test:
+  - name: "Basic smoketest of github API"
+  - headers: {accept: 'application/json'}
+  - url: "/api/dockman/persistentdisk"
+  - method: "GET"

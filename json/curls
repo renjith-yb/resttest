@@ -1,0 +1,9 @@
+curl -k -v -X POST -H 'Content-Type: application/json'  https://manual-2-node-1258-2way.int.convergent.io/api/dockman/tenant --data-binary @tenant.json
+
+
+curl -k -v -X POST -H 'Content-Type: application/json' -d @persistent_disk.json https://manual-2-node-1258-2way.int.convergent.io/api/dockman/persistentdisk
+
+
+
+
+curl -k -v -X POST -H 'Content-Type: application/json' -d @simplerc_withPD.json https://manual-2-node-1258-1way.int.convergent.io/api/dockman/ns/tenant0/replicationcontrollers

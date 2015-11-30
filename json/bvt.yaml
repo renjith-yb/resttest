@@ -1,0 +1,23 @@
+# Simple tests to verify things work against a live REST service that returns JSON.. Github is a natural one
+---
+- config:
+  - testset: "Persistent Disk BVT"
+
+- test:
+  - name: "Create Persistent Disk"
+  - variable_binds: {'path':'persistent_disk.json'}
+  - headers: {'Content-Type': 'application/json'}
+  - url: "/api/dockman/persistentdisk"
+  - method: "POST"
+  - body: {'file':{'template':'$path'}}
+  - expected_status: [201]
+- test:
+  - name: "Check Created persistent disk"
+  - headers: {'Content-Type': 'application/json'}
+  - url: "/api/dockman/persistentdisk"
+  - method: "GET"
+- test:
+   - name: "Cleanup Persistent disk"
+   - url: "/api/dockman/persistentdisk/ghostdisk"
+   - method: 'DELETE'
+   - expected_status: [202]

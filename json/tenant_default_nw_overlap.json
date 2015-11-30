@@ -1,0 +1,9 @@
+{
+"desc": "network4 desc",
+"macvlan": {
+"v4network":
+{ "gateway": "172.20.0.1", "subnet": "172.20.0.0/18" }
+},
+"mode": "MACVLAN",
+"name": "network4"
+}

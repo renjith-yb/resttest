@@ -1,0 +1,13 @@
+{
+  "network":
+    { "mode": "VLAN",
+      "name": "net_wrong",
+      "vlan": {
+         "vlanid": "966",
+         "v4network": {
+            "subnet": "172.20.31.0/31",
+            "gateway": "172.20.31.1"
+         }
+       }
+    }
+}

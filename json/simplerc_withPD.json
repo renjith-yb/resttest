@@ -1,0 +1,43 @@
+{
+    "name": "si2",
+    "spec": {
+        "replicas": 1,
+        "replicaSelector": {"provides": "si2"},
+        "podTemplate": {
+            "spec": {
+                "on_networks": [{"name": "network1", "addresses": []}],
+                "volumes": [
+                    {
+                        "name": "volume1",
+                        "source": {
+                           "cohoPersistentDisk": {
+                              "name": "pdisk1"
+                           }
+                        }
+                    }
+                ],
+                "containers": [
+                    {
+                        "command": [
+                                    "sleep",
+                                    "999999999"
+                                ],
+                        "name": "si2",
+                        "image": "docker.int.convergent.io:5000/library/alpine",
+                        "imagePullPolicy": "PullIfNotPresent",
+                        "volumeMounts": [
+                            {
+                                "name": "volume1",
+                                "readOnly": "false",
+                                "mountPath": "/opt/pdisk1"
+                            }
+                        ]
+                    },
+                ],
+                "restartPolicy": "Always"
+            },
+            "labels": {"provides": "si2"}
+        },
+        "labels": {"provides": "si2"}
+    }
+}

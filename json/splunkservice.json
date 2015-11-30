@@ -1,0 +1,12 @@
+{
+  "name": "splunkserver",
+  "spec": {
+    "on_networks": [
+       {
+          "name": "tnet4E76",
+          "addresses": ["172.20.31.10"]
+       }
+    ],
+    "selector": {"provides": "splunkserver"}
+  }
+}

@@ -1,0 +1,25 @@
+# Simple tests to verify things work against a live REST service that returns JSON.. Github is a natural one
+---
+- config:
+  - testset: "MS Infra"
+  - timeout: 6000000
+
+- test:
+  - name: "Create Tenant"
+  - variable_binds: {'path':'tenant.json'}
+  - headers: {'Content-Type': 'application/json'}
+  - url: "/api/dockman/tenant"
+  - method: "POST"
+  - body: {'file':{'template':'$path'}}
+  - expected_status: [201]
+- test:
+  - name: "Check Created tenant"
+  - headers: {'Content-Type': 'application/json'}
+  - url: "/api/dockman/tenant"
+  - method: "GET"
+
+- test:
+   - name: "Cleanup Tenant"
+   - url: "/api/dockman/tenant/tenant0"
+   - method: 'DELETE'
+   - expected_status: [202]

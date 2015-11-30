@@ -1,0 +1,11 @@
+{
+            "desc": "network_overlap_novlan",
+            "macvlan": {
+                "v4network": {
+                    "gateway": "10.11.43.125",
+                    "subnet": "10.11.43.1/24"
+                }
+            },
+            "mode": "MACVLAN",
+            "name": "net_olap_novlan"
+        }

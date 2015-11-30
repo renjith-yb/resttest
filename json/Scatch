@@ -1,0 +1,20 @@
+- test:
+  - name: "JSON file"
+  - variable_binds: {'path':'persistent_disk.json'}
+  - headers: {'Content-Type': 'application/json'}
+  - url: "/api/dockman/persistentdisk"
+  - method: "POST"
+  - body: {'file':{'template':'$path'}}
+  - expected_status: [201]
+
+- test:
+  - name: "Check Created tenant"
+  - headers: {'Content-Type': 'application/json'}
+  - url: "/api/dockman/tenant"
+  - method: "GET"
+
+- test:
+   - name: "Cleanup Tenant"
+   - url: "/api/dockman/tenant/tenant01"
+   - method: 'DELETE'
+   - expected_status: [202]

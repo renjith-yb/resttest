@@ -1,0 +1,12 @@
+{
+            "desc": "network_overlap",
+            "vlan": {
+                "vlanid": 930,
+                "v4network": {
+                    "gateway": "10.11.43.125",
+                    "subnet": "10.11.43.1/24"
+                }
+            },
+            "mode": "VLAN",
+            "name": "network_overlap"
+        }

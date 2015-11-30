@@ -1,0 +1,40 @@
+{
+    "name": "sse3",
+    "spec": {
+        "replicas": 1,
+        "replicaSelector": {"provides": "sserveri2"},
+        "podTemplate": {
+            "spec": {
+                "on_networks": [{"name": "network1", "addresses": []}],
+                "volumes": [
+                    {
+                        "name": "volume1",
+                        "source": {
+                           "cohoEphemeralDisk": {
+                              "sizeMB": 10000
+                           }
+                        }
+                    }
+                ],
+                "containers": [
+                    {
+                        "command": ["sleep", "999999999"],
+                        "name": "sserveri2",
+                        "image": "docker.int.convergent.io:5000/library/noimage",
+                        "imagePullPolicy": "PullIfNotPresent",
+                        "volumeMounts": [
+                            {
+                                "name": "volume1",
+                                "readOnly": "false",
+                                "mountPath": "/mnt/loadtest"
+                            }
+                        ]
+                    }
+                ],
+                "restartPolicy": "Always"
+            },
+            "labels": {"provides": "sserveri2"}
+        },
+        "labels": {"provides": "sserveri2"}
+    }
+}

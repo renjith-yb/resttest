@@ -1,0 +1,45 @@
+{
+            "labels": {
+                "provides": "filldisk"
+            }, 
+            "name": "filldisk_pod_PD", 
+            "ns": "tenant0", 
+            "spec": {
+                "containers": [
+                    {
+                        "command": [
+                            "bash", 
+                            "-c", 
+                            "dd obs=2048 if=/dev/urandom of=/v1"
+                        ], 
+                        "image": "docker.int.convergent.io:5000/coho/dockmantests", 
+                        "imagePullPolicy": "PullIfNotPresent", 
+                        "name": "filldisk_pod_PD",
+                        "volumeMounts": [
+                            {
+                                "readOnly": "false",
+                                "mountPath": "/mnt/v1", 
+                                "name": "volume3"
+                            }
+                        ]
+                    }
+                ], 
+                "on_networks": [
+                    {
+                        "addresses": [], 
+                        "name": "network1"
+                    }
+                ], 
+                "restartPolicy": "Never", 
+                "volumes": [
+                    {
+                        "name": "volume3", 
+                        "source": {
+                            "cohoPersistentDisk": {
+                                 "name": "pdisk1" 
+                            }
+                        }
+                    }
+                ]
+            }
+        }

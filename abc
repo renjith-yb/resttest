@@ -1,0 +1,10 @@
+# Template body path, but not body itself
+# Simple tests to verify things work against a live REST service that returns JSON.. Github is a natural one
+---
+- config:
+  - testset: "Simple github.com API Test"
+- test:
+  - name: "Sample json as a file"
+  - url: "/api/dockman/persistentdisk"
+  - method: "GET"
+  - headers: {'Content-Type': 'application/json'}

@@ -1,0 +1,44 @@
+{
+    "name": "sserverrc",
+    "spec": {
+        "replicas": 3,
+        "replicaSelector": {"provides": "sserver2"},
+        "podTemplate": {
+            "spec": {
+                "on_networks": [{"name": "network1", "addresses": []}],
+                "volumes": [
+                    {
+                        "name": "volume1",
+                        "source": {
+                           "cohoPersistentDisk": {
+                              "name": "pdisk1"
+                           }
+                        }
+                    },
+                    {
+                        "name": "volume2",
+                        "source": {
+                           "cohoPersistentDisk": {
+                              "name": "pdisk2"
+                           }
+                        }
+                    }
+                ],
+                "containers": [
+                    {
+                        "command": [
+                                    "sleep",
+                                    "999999999"
+                                ],
+                        "name": "ss",
+                        "image": "docker.int.convergent.io:5000/library/alpine",
+                        "imagePullPolicy": "PullIfNotPresent"
+                    }
+                ],
+                "restartPolicy": "Always"
+            },
+            "labels": {"provides": "sserver2"}
+        },
+        "labels": {"provides": "sserver2"}
+    }
+}

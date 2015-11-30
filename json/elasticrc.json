@@ -1,0 +1,42 @@
+{
+    "name": "eserverrc",
+    "spec": {
+        "replicas": 6,
+        "replicaSelector": {"provides": "splunkserver2"},
+        "podTemplate": {
+            "spec": {
+                "on_networks": [{"name": "network1", "addresses": []}],
+                "volumes": [
+                    {
+                        "name": "volume1", 
+                        "source": {
+                           "cohoPersistentDisk": {
+                              "name": "splunketc"
+                           }
+                        }
+                    },
+                    {
+                        "name": "volume2", 
+                        "source": {
+                           "cohoPersistentDisk": {
+                              "name": "splunkvar"
+                           }
+                        }
+                    }
+                ],
+                "containers": [
+                    {
+                        "command": [ "elasticsearch" ],
+                        "memory": "1073741824",
+                        "name": "elasticserver",
+                        "image": "172.20.31.6:5000/elasticsearch",
+                        "imagePullPolicy": "PullIfNotPresent"
+                    }
+                ],
+                "restartPolicy": "Always"
+            },
+            "labels": {"provides": "eserver2"}
+        },
+        "labels": {"provides": "eserver2"}
+    }
+}

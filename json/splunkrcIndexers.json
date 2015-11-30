@@ -1,0 +1,53 @@
+{
+    "name": "splunkserverrc",
+    "spec": {
+        "replicas": 0,
+        "replicaSelector": {"provides": "splunkserver2"},
+        "podTemplate": {
+            "spec": {
+                "on_networks": [{"name": "tnetFC29", "addresses": []}],
+                "volumes": [
+                    {
+                        "name": "volume1", 
+                        "source": {
+                           "cohoPersistentDisk": {
+                              "name": "splunketc"
+                           }
+                        }
+                    },
+                    {
+                        "name": "volume2", 
+                        "source": {
+                           "cohoPersistentDisk": {
+                              "name": "splunkvar"
+                           }
+                        }
+                    }
+                ],
+                "containers": [
+                    {
+                        "command": [ "start-service" ],
+                        "name": "splunkserver",
+                        "image": "172.20.31.4:5000/splunk",
+                        "imagePullPolicy": "PullIfNotPresent",
+                        "volumeMounts": [
+                            {
+                                "name": "volume1",
+                                "readOnly": "false",
+                                "mountPath": "/opt/splunk/etc"
+                            },
+                            {
+                                "name": "volume2",
+                                "readOnly": "false",
+                                "mountPath": "/opt/splunk/var"
+                            }
+                        ]
+                    }
+                ],
+                "restartPolicy": "Always"
+            },
+            "labels": {"provides": "splunkserver2"}
+        },
+        "labels": {"provides": "splunkserver2"}
+    }
+}

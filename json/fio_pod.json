@@ -1,0 +1,40 @@
+{
+            "labels": {
+                "provides": "fio"
+            }, 
+            "name": "fio_pod_3", 
+            "ns": "tenant0", 
+            "spec": {
+                "containers": [
+                    {
+                        "command": [ ], 
+                        "image": "172.20.31.5:5000/pl1ght/fio", 
+                        "name": "fio_pod",
+                        "volumeMounts": [
+                            {
+                                "readOnly": "false",
+                                "mountPath": "/mnt/loadtest", 
+                                "name": "volume1"
+                            }
+                        ]
+                    }
+                ], 
+                "on_networks": [
+                    {
+                        "addresses": [], 
+                        "name": "network1"
+                    }
+                ], 
+                "restartPolicy": "Never", 
+                "volumes": [
+                    {
+                        "name": "volume1", 
+                        "source": {
+                            "cohoEphemeralDisk": {
+                                "sizeMB": "1024"
+                            }
+                        }
+                    }
+                ]
+            }
+        }

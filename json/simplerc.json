@@ -1,0 +1,27 @@
+{
+    "name": "sserverrc",
+    "spec": {
+        "replicas": 4,
+        "replicaSelector": {"provides": "sserver2"},
+        "podTemplate": {
+            "spec": {
+                "on_networks": [{"name": "network1", "addresses": []}],
+                "volumes": [ ],
+                "containers": [
+                    {
+                        "command": [
+                                    "sleep",
+                                    "999999999"
+                                ],
+                        "name": "sserver",
+                        "image": "registry:5000/coho/rsyslog",
+                        "imagePullPolicy": "PullIfNotPresent"
+                    }
+                ],
+                "restartPolicy": "Always"
+            },
+            "labels": {"provides": "sserver2"}
+        },
+        "labels": {"provides": "sserver2"}
+    }
+}

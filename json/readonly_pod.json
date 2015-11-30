@@ -1,0 +1,45 @@
+{
+            "labels": {
+                "provides": "readonly"
+            }, 
+            "name": "readonly_pod_1", 
+            "ns": "tenant0", 
+            "spec": {
+                "containers": [
+                    {
+                        "command": [
+                            "/bin/sh", 
+                            "-c", 
+                            "for i in `seq 0 99999`; do echo \"readOnlypod $i\" >> /mnt/v1/tmpfile; cat /mnt/v1/tmpfile; sleep 0.510000; done"
+                        ], 
+                        "image": "docker.int.convergent.io:5000/library/alpine", 
+                        "imagePullPolicy": "PullIfNotPresent", 
+                        "name": "readOnly_pod",
+                        "volumeMounts": [
+                            {
+                                "readOnly": "true",
+                                "mountPath": "/mnt/v1", 
+                                "name": "volume1"
+                            }
+                        ]
+                    }
+                ], 
+                "on_networks": [
+                    {
+                        "addresses": [], 
+                        "name": "network1"
+                    }
+                ], 
+                "restartPolicy": "Never", 
+                "volumes": [
+                    {
+                        "name": "volume1", 
+                        "source": {
+                            "cohoEphemeralDisk": {
+                                "sizeMB": "1024"
+                            }
+                        }
+                    }
+                ]
+            }
+        }

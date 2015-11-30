@@ -1,0 +1,41 @@
+{
+    "name": "sse3",
+    "spec": {
+        "replicas": 4,
+        "replicaSelector": {"provides": "sserveri2"},
+        "podTemplate": {
+            "spec": {
+                "on_networks": [{"name": "network1", "addresses": []}],
+                "volumes": [
+                    {
+                        "name": "volume1",
+                        "source": {
+                           "cohoEphemeralDisk": {
+                              "sizeMB": 1000
+                           }
+                        }
+                    }
+                ],
+                "containers": [
+                    {
+                        "command": [
+                                ],
+                        "name": "sserveri2",
+                        "image": "172.20.31.5:5000/pl1ght/fio",
+                        "imagePullPolicy": "PullIfNotPresent",
+                        "volumeMounts": [
+                            {
+                                "name": "volume1",
+                                "readOnly": "false",
+                                "mountPath": "/mnt/loadtest"
+                            }
+                        ]
+                    }
+                ],
+                "restartPolicy": "Always"
+            },
+            "labels": {"provides": "sserveri2"}
+        },
+        "labels": {"provides": "sserveri2"}
+    }
+}

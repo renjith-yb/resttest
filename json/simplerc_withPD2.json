@@ -1,0 +1,40 @@
+{
+    "name": "ghostrc",
+    "spec": {
+        "replicas": 1,
+        "replicaSelector": {"provides": "ghostserver"},
+        "podTemplate": {
+            "spec": {
+                "on_networks": [{"name": "N1", "addresses": []}],
+                "volumes": [
+                    {
+                        "name": "volume1",
+                        "source": {
+                           "cohoPersistentDisk": {
+                              "name": "ghostdisk"
+                           }
+                        }
+                    }
+                ],
+                "containers": [
+                    {
+                        "command": [ "ghost" ],
+                        "name": "ighost",
+                        "image": "10.20.31.5:5000/ghost",
+                        "imagePullPolicy": "PullIfNotPresent",
+                        "volumeMounts": [
+                            {
+                                "name": "volume1",
+                                "readOnly": "false",
+                                "mountPath": "/var/lib/ghost" 
+                            }
+                        ]
+                    }
+                ],
+                "restartPolicy": "Always"
+            },
+            "labels": {"provides": "sserveri2"}
+        },
+        "labels": {"provides": "sserveri2"}
+    }
+}

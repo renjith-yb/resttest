@@ -1,0 +1,24 @@
+{
+    "name": "eserverrc",
+    "spec": {
+        "replicas": "1",
+        "replicaSelector": {"provides": "eserver2"},
+        "podTemplate": {
+            "spec": {
+                "on_networks": [{"name": "tnet6141", "addresses": []}],
+                "containers": [
+                    {
+                        "command": [ "elasticsearch" ],
+                        "memory": "1073741824",
+                        "name": "splunkserver",
+                        "image": "172.20.31.6:5000/elasticsearch",
+                        "imagePullPolicy": "PullIfNotPresent",
+                    }
+                ],
+                "restartPolicy": "Always"
+            },
+            "labels": {"provides": "eserver2"}
+        },
+        "labels": {"provides": "eserver2"}
+    }
+}

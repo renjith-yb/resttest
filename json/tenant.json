@@ -1,0 +1,13 @@
+{
+  "network":
+    { "mode": "VLAN",
+      "name": "network1",
+      "vlan": {
+         "vlanid": "960",
+         "v4network": {
+            "subnet": "10.20.31.0/24",
+            "gateway": "10.20.31.1"
+         }
+       }
+    }
+}
